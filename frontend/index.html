@@ -1,123 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DocGen — Генератор документов</title>
-    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-
-    <header>
-        <nav>
-            <span class="logo">📄 DocGen</span>
-            <div class="nav-links">
-                <button class="nav-btn active" data-section="templates">Шаблоны</button>
-                <button class="nav-btn" data-section="generate">Генерация</button>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-
-        <!-- ===== TEMPLATES SECTION ===== -->
-        <section id="section-templates" class="page-section active">
-            <div class="section-header">
-                <h1>Шаблоны</h1>
-                <button class="btn btn-primary" id="btn-open-upload">+ Загрузить шаблон</button>
-            </div>
-
-            <!-- Upload card -->
-            <div id="upload-card" class="card hidden">
-                <h2>Загрузить новый шаблон</h2>
-                <form id="form-upload" novalidate>
-                    <div class="form-group">
-                        <label for="template-name">Имя шаблона <span class="req">*</span></label>
-                        <input type="text" id="template-name" placeholder="Название шаблона" autocomplete="off"
-                            required />
-                    </div>
-                    <div class="form-group">
-                        <label for="template-description">Описание</label>
-                        <textarea id="template-description" placeholder="Краткое описание шаблона" rows="2"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="template-file">DOCX файл <span class="req">*</span></label>
-                        <input type="file" id="template-file" accept=".docx" required />
-                        <span class="hint">Максимальный размер: 20 МБ</span>
-                    </div>
-                    <div id="upload-error" class="alert alert-error hidden"></div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" id="btn-upload-submit">Загрузить</button>
-                        <button type="button" class="btn btn-ghost" id="btn-cancel-upload">Отмена</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- List -->
-            <div id="templates-loading" class="state-msg hidden">Загрузка…</div>
-            <div id="templates-empty" class="state-msg hidden">Нет загруженных шаблонов. Нажмите «Загрузить шаблон».
-            </div>
-            <div id="templates-container"></div>
-        </section>
-
-        <!-- ===== GENERATION SECTION ===== -->
-        <section id="section-generate" class="page-section">
-            <div class="section-header">
-                <h1>Генерация документа</h1>
-            </div>
-            <div class="card">
-                <form id="form-generate" novalidate>
-                    <div class="form-group">
-                        <label for="gen-template">Шаблон <span class="req">*</span></label>
-                        <select id="gen-template" required>
-                            <option value="">— Выберите шаблон —</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="gen-markdown">Markdown-содержимое <span class="req">*</span></label>
-                        <div class="md-toolbar">
-                            <button type="button" class="icon-btn" id="btn-load-md" title="Загрузить .md файл">
-                                📂 Загрузить .md файл
-                            </button>
-                            <input type="file" id="md-file-input" accept=".md,.markdown,.txt" class="hidden" />
-                        </div>
-                        <textarea id="gen-markdown" rows="20"
-                            placeholder="# Заголовок&#10;&#10;Введите или вставьте Markdown-содержимое здесь…&#10;&#10;## Формулы&#10;Инлайн: $E=mc^2$&#10;Блочная:&#10;$$\int_0^\infty e^{-x} dx = 1$$"
-                            required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Формат вывода</label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="output-format" value="docx" checked />
-                                <span class="radio-box">DOCX</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="output-format" value="pdf" />
-                                <span class="radio-box">PDF</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div id="generate-error" class="alert alert-error hidden"></div>
-                    <div id="generate-result" class="alert alert-success hidden">
-                        <span>✅ Документ сгенерирован!</span>
-                        <a id="download-link" href="#" class="btn btn-success btn-sm" download>⬇ Скачать</a>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" id="btn-generate">
-                            <span class="btn-label">Генерировать</span>
-                            <span class="spinner hidden" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-    <script src="app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>

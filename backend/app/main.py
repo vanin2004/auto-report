@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import logging
 import os
 
 from fastapi import FastAPI
@@ -6,6 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.db import init_db
 from app.api import templates, generation
+
+# Make diagram_service and generation logs visible in uvicorn output
+logging.basicConfig(level=logging.INFO)
+logging.getLogger("app.services.diagram_service").setLevel(logging.DEBUG)
+logging.getLogger("app.api.generation").setLevel(logging.DEBUG)
 
 
 @asynccontextmanager

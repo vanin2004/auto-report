@@ -9,14 +9,43 @@ services:
     environment:
       - TEMPLATES_PATH=/data/templates
       - DATABASE_URL=sqlite:////data/templates.db
+      - KROKI_URL=http://kroki:8000
     expose:
       - "8000"
     restart: unless-stopped
+    depends_on:
+      - kroki
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
       timeout: 10s
       retries: 3
+
+  kroki:
+    image: yuzutech/kroki
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+      - KROKI_MERMAID_PORT=8002
+      - KROKI_PLANTUML_HOST=plantuml
+      - KROKI_PLANTUML_PORT=8080
+    expose:
+      - "8000"
+    restart: unless-stopped
+    depends_on:
+      - mermaid
+      - plantuml
+
+  mermaid:
+    image: yuzutech/kroki-mermaid
+    expose:
+      - "8002"
+    restart: unless-stopped
+
+  plantuml:
+    image: plantuml/plantuml-server:jetty
+    expose:
+      - "8080"
+    restart: unless-stopped
 
   nginx:
     image: nginx:alpine
